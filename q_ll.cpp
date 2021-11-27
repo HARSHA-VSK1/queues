@@ -5,41 +5,43 @@ template <class T>
 class node{
     public:
         T data;
-        node* next;
+        node* next = NULL;
 };
 
 template <class T>
 class Queue{
+    private:
+        node <T> *front=NULL;
+        node <T> *rear = NULL;
+   
     public:
-        void Ins(int val){
-            if(front == NULL){
-                front = new node <T> ();
-                front->data = val;
+        void Enqueue(T val){
+            node <T> *n = new node <T> ();
+            n->data = val;
+            if(front==NULL && rear==NULL){
+                front=rear=n;
             }
             else{
-                node <T> *n = new node <T> ();
-                n->data = val;
-                node <T> *ptr = front;
-                while(ptr->next!=NULL){
-                    ptr = ptr->next;
-                }
-                ptr->next = n;
+                rear->next = n;
+                rear = n;
             }
         }
-
-        void Del(){
+        
+        void Dequeue(){
             if(front==NULL){
                 cout << "Queue is empty" << endl;
+                return;
             }
             else{
                 node <T> *temp = front;
-                front =front->next;
+                cout << "Deleted: " << front->data << endl;
+                front = front->next;
                 delete temp;
             }
         }
-
+       
         void Display(){
-             if(front==NULL){
+            if(front==NULL){
                 cout << "Queue is empty" << endl;
             }
             else{
@@ -51,17 +53,34 @@ class Queue{
                 cout << endl;
             }
         }
-    private:
-        node <T> *front = NULL;
 };
 
-int main(){
+int main()
+{
+    int val,choice;
     Queue <int> q;
-    q.Ins(11);
-    q.Ins(13);
-    q.Ins(14);
-    q.Display();
-    q.Del();
-    q.Display();
-
+    cout << "1. Insert element 2. Delete element 3. Display" << endl;
+    while(1){
+        cout << "Enter choice: ";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            cout << "Enter value: ";
+            cin >> val;
+            q.Enqueue(val);
+            break;
+       
+        case 2:
+            q.Dequeue();
+            break;
+       
+        case 3:
+            q.Display();
+            break;
+        default:
+            break;
+        }
+    }
+    return 0;
 }

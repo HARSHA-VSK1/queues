@@ -6,7 +6,7 @@ class Queue{
     private:
         T *arr;
         int front = -1, rear=-1, size;
-
+    
     public:
     
         Queue(int s){
@@ -25,10 +25,10 @@ class Queue{
                 arr[rear] = val;
             }
         }
-       
+
         void Dequeue(){
             if(front==-1)
-                cout << "stack is empty";
+                cout << "Queue is empty" << endl;
             else{
                 cout << "deleted element: " << arr[front] << endl;
                 if(front==rear)
