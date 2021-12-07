@@ -55,7 +55,6 @@ class Queue{
                 front-=1;
             arr[front] = val;
         }
-        
 
 };
 int main(){
